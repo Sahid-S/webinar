@@ -1,0 +1,113 @@
+:root {
+    --primary-color: #006478;
+    --secondary-color: #2a2c41;
+    --accent-color: #fee901;
+    --text-dark: #0b0419;
+    --text-light: #242424;
+    --bg-light: #ffffff;
+    --bg-off-white: #f8f8f8;
+    --bg-light-blue: #e8f1f3;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    margin: 0;
+}
+
+.page-wrapper {
+    max-width: 1920px;
+    margin: 0 auto;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+}
+
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--text-dark);
+    line-height: 1.5;
+}
+
+h2 {
+    font-size: 40px;
+    font-weight: 600;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn-cta-wrapper {
+    border: 1px solid rgba(162, 66, 242, 0.32);
+    border-radius: 80px;
+    padding: 6px;
+    margin: 40px auto 0;
+    max-width: 515px;
+}
+
+.btn-cta {
+    display: block;
+    background: linear-gradient(99deg, #fee901 2.46%, #006478 97.81%);
+    border-radius: 80px;
+    box-shadow: 0px 0px 20px 0px rgba(9, 9, 9, 0.43);
+    padding: 15px 30px;
+    color: var(--bg-light);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.btn-cta:hover {
+    transform: scale(1.05);
+}
+
+.decorative-bg {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.bg-shape-1 {
+    top: 0;
+    right: 0;
+    width: 450px;
+    height: 450px;
+    background-color: var(--bg-light-blue);
+    border-bottom-left-radius: 100%;
+}
+
+.dandelion-svg {
+    position: absolute;
+    left: 40px;
+    top: 250px;
+    width: 72px;
+    height: 68px;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 32px;
+    }
+    h2 {
+        font-size: 32px;
+    }
+}

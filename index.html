@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generated Page</title>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@275;300;400;500;600;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<title>Fashion Business Webinar</title>
+  <link rel="stylesheet" href="global.css">
+  <style id="sections-styles">
+/* CSS for section section:hero */
+.hero-section {
+    padding-top: 50px;
+    padding-bottom: 80px;
+}
+.hero-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.hero-badge {
+    background-color: var(--primary-color);
+    border-radius: 50px;
+    box-shadow: 0px 0px 4px 1px var(--primary-color);
+    padding: 12px 30px;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+.hero-badge p {
+    color: var(--bg-light);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    margin: 0;
+}
+.hero-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 21px;
+    line-height: 1.5;
+    color: var(--text-light);
+    max-width: 1022px;
+    margin: 24px 0 40px;
+}
+.video-player-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 804px;
+}
+.video-deco-1 {
+    position: absolute;
+    top: -50px;
+    left: -100px;
+    z-index: -1;
+    width: 211px;
+}
+.video-deco-2 {
+    position: absolute;
+    bottom: -20px;
+    right: 50px;
+    z-index: 1;
+    width: 77px;
+}
+.video-player {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.video-thumbnail {
+    width: 100%;
+    display: block;
+}
+.play-button-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+.video-player:hover .play-button-overlay {
+    background-color: rgba(0,0,0,0.1);
+}
+.play-icon {
+    width: 80px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+.video-player:hover .play-icon {
+    transform: scale(1.1);
+}
+
+@media (max-width: 992px) {
+    .video-deco-1 { left: -20px; }
+    .video-deco-2 { right: -10px; }
+}
+@media (max-width: 768px) {
+    .hero-badge p { font-size: 16px; }
+    .hero-subtitle { font-size: 18px; }
+    .video-deco-1, .video-deco-2, .dandelion-svg { display: none; }
+}
+
+/* CSS for section section:details */
+.details-section {
+    padding: 0 0 80px;
+}
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 40px;
+    align-items: flex-start;
+}
+.host-card {
+    background-color: var(--secondary-color);
+    border: 6px solid #3d405a;
+    border-radius: 16px;
+    padding: 95px 20px 40px;
+    text-align: center;
+    color: var(--bg-light);
+    position: relative;
+    margin-top: 75px;
+}
+.host-image-wrapper {
+    position: absolute;
+    top: -75px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 150px;
+}
+.host-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid #3d405a;
+}
+.host-name {
+    font-size: 25px;
+    font-weight: 700;
+}
+.host-title {
+    font-size: 20px;
+    font-weight: 275;
+    margin: 5px 0 0;
+}
+.divider {
+    border: 0;
+    height: 1px;
+    background-color: #ffffff;
+    opacity: 0.5;
+    margin: 25px auto;
+    width: 90%;
+}
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-top: 30px;
+}
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+.stat-icon, .stat-icon-wrapper {
+    width: 75px;
+    height: 75px;
+}
+.stat-icon-wrapper {
+    position: relative;
+}
+.stat-icon-part1 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.stat-icon-part2 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+}
+.stat-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    line-height: 1.2;
+    font-weight: 275;
+    margin: 0;
+}
+.stat-text strong {
+    font-weight: 600;
+}
+.webinar-info {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding-top: 20px;
+}
+.webinar-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.webinar-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-light);
+    white-space: nowrap;
+}
+.info-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.info-card {
+    background-color: var(--bg-off-white);
+    border: 1px solid #e9e9e9;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.06);
+}
+.info-icon, .info-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+.info-icon-wrapper {
+    position: relative;
+}
+.info-icon-part1, .info-icon-part2 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.info-icon-part2 {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+}
+.info-text .info-label {
+    color: var(--primary-color);
+    font-size: 14px;
+    margin: 0 0 5px;
+}
+.info-text .info-value {
+    color: var(--text-light);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+}
+
+@media (max-width: 992px) {
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+    .host-card {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 550px;
+    }
+    .webinar-info {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+@media (max-width: 576px) {
+    .info-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    .stats-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* CSS for section section:who-is-this-for */
+.who-is-this-for-section {
+    padding: 80px 0;
+    background-color: var(--bg-light);
+    position: relative;
+}
+.title-underline {
+    display: block;
+    margin: -15px auto 50px;
+    width: 270px;
+}
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+.feature-card {
+    background-color: rgba(0, 100, 120, 0.09);
+    border: 1px solid #e9e9e9;
+    border-radius: 12px;
+    padding: 25px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+.checkmark-icon {
+    background-color: #2dcb7d;
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    font-weight: 900;
+    font-size: 14px;
+}
+.feature-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0;
+    color: var(--text-light);
+}
+.feature-text .bold {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.bottom-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    color: var(--primary-color);
+    text-align: center;
+    margin-top: 40px;
+}
+
+@media (max-width: 992px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 768px) {
+    .bottom-text {
+        font-size: 24px;
+    }
+}
+
+/* CSS for section section:what-you-learn */
+.what-you-learn-section {
+    padding: 80px 0;
+    background-color: #e8f1f3;
+}
+.title-underline-learn {
+    display: block;
+    margin: -20px auto 50px;
+    width: 465px;
+    max-width: 100%;
+}
+.learn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+.learn-card {
+    background-color: var(--bg-light);
+    border-radius: 12px;
+    box-shadow: 0px 0px 25px 0px rgba(170, 170, 170, 0.25);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+.learn-card:hover {
+    transform: translateY(-10px);
+}
+.learn-image {
+    width: 100%;
+    height: 256px;
+    object-fit: cover;
+}
+.learn-text {
+    padding: 30px 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* CSS for section section:faq */
+.faq-section {
+    padding: 80px 0;
+    background-color: var(--bg-light);
+}
+.faq-container {
+    max-width: 1080px;
+    margin: 40px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.faq-item {
+    border-radius: 16px;
+    overflow: hidden;
+}
+.faq-question {
+    padding: 20px 50px 20px 25px;
+    background-color: var(--bg-off-white);
+    border: 1px solid #e9e9e9;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text-dark);
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    transition: background-color 0.3s, color 0.3s;
+}
+.faq-question::-webkit-details-marker {
+    display: none;
+}
+.faq-question::after {
+    content: url('images/29_59.svg');
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 0.3s ease;
+    width: 28px;
+    height: 28px;
+}
+.faq-item[open] > .faq-question {
+    background-color: var(--primary-color);
+    color: var(--bg-light);
+    border-color: var(--primary-color);
+    border-radius: 8px 8px 0 0;
+}
+.faq-item[open] > .faq-question::after {
+    content: url('images/29_55.svg');
+    transform: translateY(-50%) rotate(0deg);
+}
+.faq-answer {
+    padding: 25px;
+    background-color: var(--bg-off-white);
+    border: 1px solid var(--primary-color);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+}
+.faq-answer p {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+/* CSS for section section:footer */
+.site-footer {
+    background-color: var(--bg-light);
+    padding: 50px 0;
+    border-top: 1px solid #e0e0e0;
+}
+.site-footer .container {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+.copyright {
+    font-weight: 700;
+    font-size: 16px;
+    color: #000000;
+    margin: 0 0 15px;
+}
+.disclaimer {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #000000;
+    max-width: 1076px;
+    margin: 0 auto;
+}
+.disclaimer a {
+    color: #0d6efd;
+    text-decoration: underline;
+}
+  </style>
+  <script src="global.js" defer></script>
+</head>
+<body>
+<section id="hero" class="hero-section">
+    <div class="page-wrapper">
+        <div class="decorative-bg bg-shape-1"></div>
+        <img src="images/2_24.svg" alt="Decorative Dandelion" class="dandelion-svg">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <p>Perfect for Beginners to start a Boutique or to those who wants to start a Business.</p>
+                </div>
+                <h1>Have you always had an eye for fashion, but never know where to start.</h1>
+                <p class="hero-subtitle">Transform your passion in fashion into a 7 figure career with us in this 1:1 session.</p>
+
+                <div class="video-player-wrapper">
+                    <img src="images/2_40.svg" alt="decorative element" class="video-deco-1">
+                    <img src="images/2_35.svg" alt="decorative element" class="video-deco-2">
+                    <div class="video-player">
+                        <img src="images/d08e7dcfa8af8da59e25b801f51ba44ea7a4cf28.png" alt="Webinar Video Thumbnail" class="video-thumbnail">
+                        <div class="play-button-overlay">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/128px-YouTube_full-color_icon_%282017%29.svg.png" alt="Play Video" class="play-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="details" class="details-section">
+    <div class="container">
+        <div class="details-grid">
+            <div class="host-card">
+                <div class="host-image-wrapper">
+                    <img src="images/cf65cc9dee0b9d39633ab5bbae3d793fef8ab677.png" alt="Nishanthini Yogaraj" class="host-image">
+                </div>
+                <h3 class="host-name">Nishanthini Yogaraj</h3>
+                <p class="host-title">Founder of the Needles</p>
+                <hr class="divider">
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <!--merged image-->
+                        <div class="stat-icon-wrapper">
+                            <img src="images/2_83.svg" alt="" class="stat-icon-part1">
+                            <img src="images/2_84.svg" alt="" class="stat-icon-part2">
+                        </div>
+                        <p class="stat-text"><strong>4+</strong> Years of<br>Experience</p>
+                    </div>
+                    <div class="stat-item">
+                        <!--merged image-->
+                        <div class="stat-icon-wrapper">
+                            <img src="images/2_97.svg" alt="" class="stat-icon-part1">
+                            <img src="images/2_98.svg" alt="" class="stat-icon-part2">
+                        </div>
+                        <p class="stat-text"><strong>6,000+</strong> Clients<br>Transformed</p>
+                    </div>
+                    <div class="stat-item">
+                        <img src="images/2_107.svg" alt="Followers Icon" class="stat-icon">
+                        <p class="stat-text"><strong>200 k+</strong><br>Followers</p>
+                    </div>
+                </div>
+            </div>
+            <div class="webinar-info">
+                <div class="webinar-title-wrapper">
+                    <img src="images/2_117.svg" alt="line decor">
+                    <h3 class="webinar-title">Webinar Details</h3>
+                    <img src="images/2_122.svg" alt="line decor">
+                </div>
+                <div class="info-cards-grid">
+                    <div class="info-card">
+                        <img src="images/2_127.svg" alt="Date Icon" class="info-icon">
+                        <div class="info-text">
+                            <p class="info-label">DATE</p>
+                            <p class="info-value">17th August<br>2025</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <img src="images/2_142.svg" alt="Time Icon" class="info-icon">
+                        <div class="info-text">
+                            <p class="info-label">TIME</p>
+                            <p class="info-value">10AM - 1PM<br>(IST)</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <img src="images/2_152.svg" alt="Venue Icon" class="info-icon">
+                        <div class="info-text">
+                            <p class="info-label">VENUE</p>
+                            <p class="info-value">On Zoom</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <!--merged image-->
+                        <div class="info-icon-wrapper">
+                            <img src="images/2_162.svg" alt="" class="info-icon-part1">
+                            <img src="images/2_163.svg" alt="" class="info-icon-part2">
+                        </div>
+                        <div class="info-text">
+                            <p class="info-label">LANGUAGE</p>
+                            <p class="info-value">Hindi & Eng.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-cta-wrapper">
+                    <a href="#signup" class="btn-cta">Sign up Now @ ₹199</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="who-is-this-for" class="who-is-this-for-section">
+    <div class="container">
+        <h2>Who is this webinar for?</h2>
+        <img src="images/2_366.svg" alt="underline" class="title-underline">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="checkmark-icon">✓</div>
+                <p class="feature-text"><span class="bold">Fashion designing graduates</span> who want to pivot to business.</p>
+            </div>
+            <div class="feature-card">
+                <div class="checkmark-icon">✓</div>
+                <p class="feature-text"><span class="bold">Fashion enthusiasts</span> exploring career opportunities.</p>
+            </div>
+            <div class="feature-card">
+                <div class="checkmark-icon">✓</div>
+                <p class="feature-text"><span class="bold">Home makers</span> if you want to start a boutique.</p>
+            </div>
+            <div class="feature-card">
+                <div class="checkmark-icon">✓</div>
+                <p class="feature-text"><span class="bold">Home boutique owners</span> who want to start in commercial space.</p>
+            </div>
+        </div>
+        <div class="btn-cta-wrapper" style="max-width: 880px;">
+            <a href="#signup" class="btn-cta" style="background: linear-gradient(104deg, #feea04 2.51%, #006478 99.55%);">Sign up Now @ ₹199</a>
+        </div>
+        <p class="bottom-text">You would learn to style both Men & Women!</p>
+    </div>
+</section>
+<section id="what-you-learn" class="what-you-learn-section">
+    <div class="container">
+        <h2>What You’ll Learn</h2>
+        <img src="images/2_483.svg" alt="underline" class="title-underline-learn">
+        <div class="learn-grid">
+            <div class="learn-card">
+                <img src="images/1fe5581a164927a5923a0392f4be4728ec2bf83d.png" alt="Contact for vendors" class="learn-image">
+                <p class="learn-text">Contact for vendors</p>
+            </div>
+            <div class="learn-card">
+                <img src="images/f96e910102688bb2b8d535524de66d8123cce00f.png" alt="How to buy materials" class="learn-image">
+                <p class="learn-text">How to buy materials</p>
+            </div>
+            <div class="learn-card">
+                <img src="images/2_496.svg" alt="How to hire manpower" class="learn-image">
+                <p class="learn-text">How to hire manpower</p>
+            </div>
+            <div class="learn-card">
+                <img src="images/1fe5581a164927a5923a0392f4be4728ec2bf83d.png" alt="Roles & responsibilities" class="learn-image">
+                <p class="learn-text">Roles & responsibilities</p>
+            </div>
+            <div class="learn-card">
+                <img src="images/f96e910102688bb2b8d535524de66d8123cce00f.png" alt="Investment" class="learn-image">
+                <p class="learn-text">Investment</p>
+            </div>
+            <div class="learn-card">
+                <img src="images/25_23.svg" alt="Setup guide" class="learn-image">
+                <p class="learn-text">Setup guide</p>
+            </div>
+             <div class="learn-card">
+                <img src="images/1fe5581a164927a5923a0392f4be4728ec2bf83d.png" alt="Social media handling" class="learn-image">
+                <p class="learn-text">Social media handling</p>
+            </div>
+            <div class="learn-card">
+                <img src="images/f96e910102688bb2b8d535524de66d8123cce00f.png" alt="Digital marketing" class="learn-image">
+                <p class="learn-text">Digital marketing</p>
+            </div>
+        </div>
+        <div class="btn-cta-wrapper" style="max-width: 1660px;">
+            <a href="#signup" class="btn-cta" style="background: linear-gradient(115deg, #feea04 2.69%, #006478 106.88%);">Sign up Now @ ₹299</a>
+        </div>
+    </div>
+</section>
+<section id="faq" class="faq-section">
+    <div class="container">
+        <h2><span style="color: var(--primary-color);">Frequently</span> Asked Questions</h2>
+        <img src="images/29_35.svg" alt="underline" class="title-underline">
+        <div class="faq-container">
+            <details class="faq-item" open>
+                <summary class="faq-question">How should I prepare for this webinar ?</summary>
+                <div class="faq-answer">
+                    <p>You just need a stable internet connection, a pen, a paper and a curious mind to imbibe-implement-improve your skill set and mindset.</p>
+                </div>
+            </details>
+            <details class="faq-item">
+                <summary class="faq-question">Will I get a reminder before the webinar begins?</summary>
+                <div class="faq-answer">
+                    <p>Yes, you will receive reminders via email and WhatsApp prior to the webinar.</p>
+                </div>
+            </details>
+            <details class="faq-item">
+                <summary class="faq-question">When is the webinar?</summary>
+                <div class="faq-answer">
+                    <p>The webinar is scheduled for 17th August 2025, from 10 AM to 1 PM (IST).</p>
+                </div>
+            </details>
+            <details class="faq-item">
+                <summary class="faq-question">How will I get the link to attend the webinar?</summary>
+                <div class="faq-answer">
+                    <p>The Zoom link for the webinar will be sent to your registered email address and WhatsApp number.</p>
+                </div>
+            </details>
+            <details class="faq-item">
+                <summary class="faq-question">I made the payment but didn’t receive any email.</summary>
+                <div class="faq-answer">
+                    <p>Please check your spam or promotions folder. If you still can't find it, contact our support team with your payment details.</p>
+                </div>
+            </details>
+        </div>
+        <div class="btn-cta-wrapper" style="max-width: 1080px;">
+            <button id="rzp-button1" class="btn-cta" style="background: linear-gradient(107deg, #feea04 2.54%, #006478 101.02%); border: none; cursor: pointer;">Pay Now @ ₹299</button>
+        </div>
+    </div>
+</section>
+<footer id="footer" class="site-footer">
+    <div class="container">
+        <p class="copyright">Copyright © 2025 , The Needles. All rights reserved.</p>
+        <p class="disclaimer">This site is not a part of the Meta™ Inc. Additionally, this site is not endorsed by Meta™ in any way. All content provided on this page is for informational and promotional purposes only. Results may vary and are not guaranteed. Please review our <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a> before proceeding.</p>
+    </div>
+</footer>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+// Function to create order using backend API
+async function createRazorpayOrder() {
+    try {
+        const response = await fetch('http://localhost:3000/create-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                amount: 100, // ₹299 in paise
+                currency: 'INR',
+                receipt: 'webinar_' + Date.now(),
+                notes: {
+                    webinar: 'Fashion Business Webinar - 17th August 2025',
+                    event_type: 'webinar_registration'
+                }
+            })
+        });
+        
+        const order = await response.json();
+        
+        if (order.error) {
+            throw new Error(order.error);
+        }
+        
+        return order;
+    } catch (error) {
+        console.error('Error creating order:', error);
+        alert('Failed to create order. Please try again.');
+        return null;
+    }
+}
+
+// Function to handle successful payment
+function handlePaymentSuccess(response) {
+    // Send payment details to backend for verification
+    fetch('http://localhost:3000/verify-payment', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            alert('Payment successful! You will receive webinar details via email.');
+            // Redirect to success page
+            window.location.href = 'http://localhost:3000/success';
+        } else {
+            alert('Payment verification failed. Please contact support.');
+        }
+    })
+    .catch(error => {
+        console.error('Payment verification error:', error);
+        alert('Payment verification failed. Please contact support.');
+    });
+}
+
+// Payment button click handler
+document.getElementById('rzp-button1').onclick = async function(e) {
+    e.preventDefault();
+    
+    // Show loading state
+    this.disabled = true;
+    this.innerHTML = 'Creating Order...';
+    
+    // Create order first
+    const order = await createRazorpayOrder();
+    
+    if (!order) {
+        // Reset button state if order creation failed
+        this.disabled = false;
+        this.innerHTML = 'Pay Now @ ₹299';
+        return;
+    }
+    
+    // Configure Razorpay options with the created order
+    var options = {
+        "key": "rzp_live_RWvoJlAdc0Vh7T", // Your Razorpay Key ID
+        "amount": order.amount,
+        "currency": order.currency,
+        "name": "The Needles",
+        "description": "Fashion Business Webinar Registration",
+        "image": "https://example.com/your_logo", // Replace with your logo URL
+        "order_id": order.id, // Use the dynamically created order ID
+        "handler": function (response) {
+            handlePaymentSuccess(response);
+        },
+        "prefill": {
+            "name": "", // You can pre-fill if you have user data
+            "email": "",
+            "contact": ""
+        },
+        "notes": {
+            "webinar": "Fashion Business Webinar - 17th August 2025"
+        },
+        "theme": {
+            "color": "#006478"
+        },
+        "modal": {
+            "ondismiss": function() {
+                // Reset button state when payment modal is closed
+                document.getElementById('rzp-button1').disabled = false;
+                document.getElementById('rzp-button1').innerHTML = 'Pay Now @ ₹299';
+            }
+        }
+    };
+    
+    var rzp1 = new Razorpay(options);
+    
+    // Reset button state
+    this.disabled = false;
+    this.innerHTML = 'Pay Now @ ₹299';
+    
+    // Open Razorpay checkout
+    rzp1.open();
+};
+</script>
+</body>
+</html>
