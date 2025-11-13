@@ -7,12 +7,15 @@ const PORT = 3000;
 
 // Middleware
 app.use(cors());
+// For webhook endpoint, we need raw body to verify signature
+app.use('/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 app.use(express.static('.')); // Serve static files from current directory
 
 // Razorpay credentials (In production, use environment variables)
 const RAZORPAY_KEY_ID = 'rzp_live_RWvoJlAdc0Vh7T';
 const RAZORPAY_KEY_SECRET = 'n8eGYkRP7QKIKlKdpFxHau40';
+const RAZORPAY_WEBHOOK_SECRET = 'your_webhook_secret_here'; // Get this from Razorpay Dashboard
 
 // Create order endpoint
 app.post('/create-order', async (req, res) => {
@@ -97,6 +100,114 @@ app.post('/verify-payment', async (req, res) => {
         });
     }
 });
+
+// Webhook endpoint
+app.post('/webhook', (req, res) => {
+    try {
+        const crypto = require('crypto');
+        
+        // Get the signature from headers
+        const receivedSignature = req.headers['x-razorpay-signature'];
+        
+        // Get raw body (since we used express.raw middleware for this route)
+        const webhookBody = req.body.toString();
+        
+        // Generate expected signature
+        const expectedSignature = crypto
+            .createHmac('sha256', RAZORPAY_WEBHOOK_SECRET)
+            .update(webhookBody)
+            .digest('hex');
+        
+        // Verify signature
+        if (receivedSignature !== expectedSignature) {
+            console.log('Webhook signature verification failed');
+            return res.status(400).json({ 
+                error: 'Invalid signature' 
+            });
+        }
+        
+        // Parse the webhook payload
+        const webhookData = JSON.parse(webhookBody);
+        const event = webhookData.event;
+        const payload = webhookData.payload;
+        
+        console.log('Webhook received:', event);
+        console.log('Payload:', JSON.stringify(payload, null, 2));
+        
+        // Handle different webhook events
+        switch(event) {
+            case 'payment.authorized':
+                console.log('Payment authorized:', payload.payment.entity.id);
+                // Handle payment authorization
+                // You might want to capture the payment or update your database
+                break;
+                
+            case 'payment.captured':
+                console.log('Payment captured:', payload.payment.entity.id);
+                // Payment successful - grant access, send confirmation email, etc.
+                handleSuccessfulPayment(payload.payment.entity);
+                break;
+                
+            case 'payment.failed':
+                console.log('Payment failed:', payload.payment.entity.id);
+                // Handle failed payment - notify user, log, etc.
+                handleFailedPayment(payload.payment.entity);
+                break;
+                
+            case 'order.paid':
+                console.log('Order paid:', payload.order.entity.id);
+                // Order completely paid
+                break;
+                
+            default:
+                console.log('Unhandled webhook event:', event);
+        }
+        
+        // Always respond with 200 to acknowledge receipt
+        res.status(200).json({ received: true });
+        
+    } catch (error) {
+        console.error('Webhook error:', error);
+        res.status(500).json({ 
+            error: 'Webhook processing failed',
+            message: error.message 
+        });
+    }
+});
+
+// Helper function to handle successful payment
+function handleSuccessfulPayment(paymentEntity) {
+    console.log('Processing successful payment:', {
+        payment_id: paymentEntity.id,
+        order_id: paymentEntity.order_id,
+        amount: paymentEntity.amount / 100, // Convert paise to rupees
+        email: paymentEntity.email,
+        contact: paymentEntity.contact,
+        method: paymentEntity.method
+    });
+    
+    // Here you can:
+    // 1. Update database with payment status
+    // 2. Send confirmation email to customer
+    // 3. Grant access to webinar
+    // 4. Send invoice
+    // 5. Trigger any other post-payment workflows
+}
+
+// Helper function to handle failed payment
+function handleFailedPayment(paymentEntity) {
+    console.log('Processing failed payment:', {
+        payment_id: paymentEntity.id,
+        order_id: paymentEntity.order_id,
+        error_code: paymentEntity.error_code,
+        error_description: paymentEntity.error_description
+    });
+    
+    // Here you can:
+    // 1. Update database with failed status
+    // 2. Send retry email to customer
+    // 3. Log failure for analysis
+}
 
 // Success page endpoint
 app.get('/success', (req, res) => {
