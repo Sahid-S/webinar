@@ -687,7 +687,31 @@ document.getElementById('registration-form').addEventListener('submit', async fu
                 // Reset button state when payment modal is closed
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Proceed to Payment';
-            }
+            },
+            // Handle payment errors
+            "escape": true,
+            "backdropclose": false,
+            "confirm_close": true
+        },
+        // Retry configuration
+        "retry": {
+            "enabled": true,
+            "max_count": 3
+        },
+        // Payment failure handler
+        "payment_failed": function(response) {
+            console.error('Payment failed:', response);
+            
+            // Store failure details in sessionStorage for the failed page
+            sessionStorage.setItem('paymentError', JSON.stringify({
+                code: response.error?.code,
+                description: response.error?.description,
+                reason: response.error?.reason,
+                timestamp: new Date().toISOString()
+            }));
+            
+            // Redirect to payment failed page
+            window.location.href = 'payment-failed.html';
         }
     };
     

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Failed - The Needles Fashion Webinar</title>
+    <link rel="stylesheet" href="global.css">
+    <style>
+        .failed-container {
+            max-width: 700px;
+            margin: 80px auto;
+            padding: 50px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .failed-icon {
+            width: 80px;
+            height: 80px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 48px;
+            color: white;
+        }
+        h1 {
+            color: #dc3545;
+            margin-bottom: 20px;
+        }
+        .info-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        .info-box h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+        .info-box p {
+            line-height: 1.8;
+            color: #856404;
+            margin: 10px 0;
+        }
+        .refund-info {
+            background: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        .refund-info h3 {
+            color: #0c5460;
+            margin-top: 0;
+        }
+        .refund-info ul {
+            color: #0c5460;
+            line-height: 2;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: linear-gradient(99deg, #fee901 2.46%, #006478 97.81%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,100,120,0.3);
+        }
+        .btn-secondary {
+            background: white;
+            color: #006478;
+            border: 2px solid #006478;
+        }
+        .btn-secondary:hover {
+            background: #006478;
+            color: white;
+        }
+        .contact-info {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e9ecef;
+        }
+        .contact-info p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="failed-container">
+        <div class="failed-icon">✕</div>
+        <h1>Payment Failed</h1>
+        <p style="font-size: 18px; color: #666; margin-bottom: 30px;">
+            We're sorry, but your payment could not be processed at this time.
+        </p>
+
+        <div class="info-box">
+            <h3>💳 Was Amount Deducted From Your Account?</h3>
+            <p><strong>Don't worry!</strong> If the payment failed but money was deducted from your account, it will be <strong>automatically refunded</strong> by Razorpay within <strong>5-7 business days</strong>.</p>
+            <p>You will receive a confirmation SMS and email once the refund is processed.</p>
+        </div>
+
+        <div class="refund-info">
+            <h3>🔄 Refund Timeline</h3>
+            <ul>
+                <li><strong>Razorpay Processing:</strong> 24-48 hours</li>
+                <li><strong>Bank Processing:</strong> 3-5 business days</li>
+                <li><strong>Total Time:</strong> 5-7 business days (maximum)</li>
+            </ul>
+            <p><strong>Note:</strong> The refund will be credited to the same payment method (card/UPI/bank) you used for the transaction.</p>
+        </div>
+
+        <h3 style="margin-top: 40px;">Common Reasons for Payment Failure:</h3>
+        <ul style="text-align: left; line-height: 2; color: #666;">
+            <li>Insufficient funds in account</li>
+            <li>Daily transaction limit exceeded</li>
+            <li>Card expired or blocked</li>
+            <li>Incorrect OTP or PIN entered</li>
+            <li>Bank server issues or downtime</li>
+            <li>Network connectivity problems</li>
+        </ul>
+
+        <div class="action-buttons">
+            <a href="register.html" class="btn btn-primary">Try Payment Again</a>
+            <a href="contact.html" class="btn btn-secondary">Contact Support</a>
+        </div>
+
+        <div class="contact-info">
+            <h3>Need Help?</h3>
+            <p><strong>Email:</strong> <a href="mailto:support@theneedles.com">support@theneedles.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+91XXXXXXXXXX">+91-XXXXXXXXXX</a></p>
+            <p style="font-size: 14px; color: #999; margin-top: 20px;">
+                When contacting support, please provide your transaction ID or screenshot of the payment failure.
+            </p>
+        </div>
+
+        <a href="index.html" style="display: inline-block; margin-top: 30px; color: #006478; text-decoration: none;">
+            ← Back to Home
+        </a>
+    </div>
+</body>
+</html>
