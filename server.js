@@ -1,9 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
@@ -12,10 +13,16 @@ app.use('/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 app.use(express.static('.')); // Serve static files from current directory
 
-// Razorpay credentials (In production, use environment variables)
-const RAZORPAY_KEY_ID = 'rzp_live_RWvoJlAdc0Vh7T';
-const RAZORPAY_KEY_SECRET = 'n8eGYkRP7QKIKlKdpFxHau40';
-const RAZORPAY_WEBHOOK_SECRET = 'your_webhook_secret_here'; // Get this from Razorpay Dashboard
+// Razorpay credentials from environment variables
+const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID;
+const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET;
+const RAZORPAY_WEBHOOK_SECRET = process.env.RAZORPAY_WEBHOOK_SECRET;
+
+// Validate required environment variables
+if (!RAZORPAY_KEY_ID || !RAZORPAY_KEY_SECRET) {
+    console.error('ERROR: Missing required Razorpay credentials in .env file');
+    process.exit(1);
+}
 
 // Create order endpoint
 app.post('/create-order', async (req, res) => {

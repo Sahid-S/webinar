@@ -8,13 +8,19 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.18.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
-  "keywords": ["razorpay", "payment", "webinar", "fashion"],
+  "keywords": [
+    "razorpay",
+    "payment",
+    "webinar",
+    "fashion"
+  ],
   "author": "The Needles",
   "license": "ISC"
 }
