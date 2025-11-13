@@ -12,16 +12,47 @@
 <title>Fashion Business Webinar</title>
   <link rel="stylesheet" href="global.css">
   <style id="sections-styles">
+/* Global styles to prevent double scrollbars */
+html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+body {
+    overflow-x: hidden;
+}
+/* Ensure no scrollable containers */
+.page-wrapper {
+    overflow: visible !important;
+}
+.container {
+    overflow: visible !important;
+}
+.video-player-wrapper {
+    overflow: visible !important;
+}
+/* Hide all iframe scrollbars globally */
+iframe {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+iframe::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
 /* CSS for section section:hero */
 .hero-section {
     padding-top: 50px;
     padding-bottom: 80px;
+    overflow: visible;
 }
 .hero-content {
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: visible;
 }
 .hero-badge {
     background-color: var(--primary-color);
@@ -62,7 +93,7 @@
     position: absolute;
     bottom: -20px;
     right: 50px;
-    z-index: 1;
+    z-index: -1;
     width: 77px;
 }
 .video-player {
@@ -71,6 +102,26 @@
     overflow: hidden;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    height: 450px;
+    background: #000;
+}
+.video-player iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
+    outline: none;
+    overflow: hidden !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+.video-player iframe::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 .video-thumbnail {
     width: 100%;
@@ -523,10 +574,17 @@
                     <img src="images/2_40.svg" alt="decorative element" class="video-deco-1">
                     <img src="images/2_35.svg" alt="decorative element" class="video-deco-2">
                     <div class="video-player">
-                        <img src="images/d08e7dcfa8af8da59e25b801f51ba44ea7a4cf28.png" alt="Webinar Video Thumbnail" class="video-thumbnail">
-                        <div class="play-button-overlay">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/128px-YouTube_full-color_icon_%282017%29.svg.png" alt="Play Video" class="play-icon">
-                        </div>
+                        <iframe 
+                            width="100%" 
+                            height="450" 
+                            src="https://www.youtube.com/embed/5_EFCN2pX-8?autoplay=1&mute=1&rel=0&modestbranding=1&showinfo=0" 
+                            title="Fashion Business Webinar Preview" 
+                            frameborder="0" 
+                            scrolling="no"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                            style="border-radius: 16px; display: block; overflow: hidden; border: none;">
+                        </iframe>
                     </div>
                 </div>
             </div>
@@ -607,7 +665,7 @@
                     </div>
                 </div>
                 <div class="btn-cta-wrapper">
-                    <a href="#signup" class="btn-cta">Sign up Now @ ₹199</a>
+                    <a href="register.html" class="btn-cta">Sign up Now @ ₹299</a>
                 </div>
             </div>
         </div>
@@ -636,7 +694,7 @@
             </div>
         </div>
         <div class="btn-cta-wrapper" style="max-width: 880px;">
-            <a href="#signup" class="btn-cta" style="background: linear-gradient(104deg, #feea04 2.51%, #006478 99.55%);">Sign up Now @ ₹199</a>
+            <a href="register.html" class="btn-cta" style="background: linear-gradient(104deg, #feea04 2.51%, #006478 99.55%);">Sign up Now @ ₹299</a>
         </div>
         <p class="bottom-text">You would learn to style both Men & Women!</p>
     </div>
@@ -680,7 +738,7 @@
             </div>
         </div>
         <div class="btn-cta-wrapper" style="max-width: 1660px;">
-            <a href="#signup" class="btn-cta" style="background: linear-gradient(115deg, #feea04 2.69%, #006478 106.88%);">Sign up Now @ ₹299</a>
+            <a href="register.html" class="btn-cta" style="background: linear-gradient(115deg, #feea04 2.69%, #006478 106.88%);">Sign up Now @ ₹299</a>
         </div>
     </div>
 </section>
@@ -721,7 +779,7 @@
             </details>
         </div>
         <div class="btn-cta-wrapper" style="max-width: 1080px;">
-            <button id="rzp-button1" class="btn-cta" style="background: linear-gradient(107deg, #feea04 2.54%, #006478 101.02%); border: none; cursor: pointer;">Pay Now @ ₹299</button>
+            <a href="register.html" class="btn-cta" style="background: linear-gradient(107deg, #feea04 2.54%, #006478 101.02%);">Sign up Now @ ₹299</a>
         </div>
     </div>
 </section>
@@ -732,130 +790,6 @@
     </div>
 </footer>
 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-// Function to create order using backend API
-async function createRazorpayOrder() {
-    try {
-        const response = await fetch('http://localhost:3000/create-order', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                amount: 100, // ₹299 in paise
-                currency: 'INR',
-                receipt: 'webinar_' + Date.now(),
-                notes: {
-                    webinar: 'Fashion Business Webinar - 17th August 2025',
-                    event_type: 'webinar_registration'
-                }
-            })
-        });
-        
-        const order = await response.json();
-        
-        if (order.error) {
-            throw new Error(order.error);
-        }
-        
-        return order;
-    } catch (error) {
-        console.error('Error creating order:', error);
-        alert('Failed to create order. Please try again.');
-        return null;
-    }
-}
 
-// Function to handle successful payment
-function handlePaymentSuccess(response) {
-    // Send payment details to backend for verification
-    fetch('http://localhost:3000/verify-payment', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_signature: response.razorpay_signature
-        })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.success) {
-            alert('Payment successful! You will receive webinar details via email.');
-            // Redirect to success page
-            window.location.href = 'http://localhost:3000/success';
-        } else {
-            alert('Payment verification failed. Please contact support.');
-        }
-    })
-    .catch(error => {
-        console.error('Payment verification error:', error);
-        alert('Payment verification failed. Please contact support.');
-    });
-}
-
-// Payment button click handler
-document.getElementById('rzp-button1').onclick = async function(e) {
-    e.preventDefault();
-    
-    // Show loading state
-    this.disabled = true;
-    this.innerHTML = 'Creating Order...';
-    
-    // Create order first
-    const order = await createRazorpayOrder();
-    
-    if (!order) {
-        // Reset button state if order creation failed
-        this.disabled = false;
-        this.innerHTML = 'Pay Now @ ₹299';
-        return;
-    }
-    
-    // Configure Razorpay options with the created order
-    var options = {
-        "key": "rzp_live_RWvoJlAdc0Vh7T", // Your Razorpay Key ID
-        "amount": order.amount,
-        "currency": order.currency,
-        "name": "The Needles",
-        "description": "Fashion Business Webinar Registration",
-        "image": "https://example.com/your_logo", // Replace with your logo URL
-        "order_id": order.id, // Use the dynamically created order ID
-        "handler": function (response) {
-            handlePaymentSuccess(response);
-        },
-        "prefill": {
-            "name": "", // You can pre-fill if you have user data
-            "email": "",
-            "contact": ""
-        },
-        "notes": {
-            "webinar": "Fashion Business Webinar - 17th August 2025"
-        },
-        "theme": {
-            "color": "#006478"
-        },
-        "modal": {
-            "ondismiss": function() {
-                // Reset button state when payment modal is closed
-                document.getElementById('rzp-button1').disabled = false;
-                document.getElementById('rzp-button1').innerHTML = 'Pay Now @ ₹299';
-            }
-        }
-    };
-    
-    var rzp1 = new Razorpay(options);
-    
-    // Reset button state
-    this.disabled = false;
-    this.innerHTML = 'Pay Now @ ₹299';
-    
-    // Open Razorpay checkout
-    rzp1.open();
-};
-</script>
 </body>
 </html>

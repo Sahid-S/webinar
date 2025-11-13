@@ -11,8 +11,8 @@ app.use(express.json());
 app.use(express.static('.')); // Serve static files from current directory
 
 // Razorpay credentials (In production, use environment variables)
-const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID;
-const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET;
+const RAZORPAY_KEY_ID = 'rzp_live_RWvoJlAdc0Vh7T';
+const RAZORPAY_KEY_SECRET = 'n8eGYkRP7QKIKlKdpFxHau40';
 
 // Create order endpoint
 app.post('/create-order', async (req, res) => {
@@ -20,7 +20,7 @@ app.post('/create-order', async (req, res) => {
         const { amount, currency, receipt, notes } = req.body;
         
         const orderData = {
-            amount: amount || 29900, // ₹299 in paise
+            amount: amount || 100, // ₹1 in paise
             currency: currency || 'INR',
             receipt: receipt || 'webinar_' + Date.now(),
             notes: notes || {}

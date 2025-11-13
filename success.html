@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Successful - Fashion Business Webinar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@275;300;400;500;600;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="global.css">
+  <style>
+    body {
+        background: linear-gradient(135deg, var(--bg-light-blue) 0%, var(--bg-light) 100%);
+    }
+    
+    .success-section {
+        padding: 80px 0;
+        min-height: calc(100vh - 100px);
+        display: flex;
+        align-items: center;
+    }
+    
+    .success-card {
+        background-color: var(--bg-light);
+        border-radius: 24px;
+        padding: 60px 40px;
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+        box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.1);
+    }
+    
+    .success-icon {
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 30px;
+        animation: scaleIn 0.5s ease-out;
+    }
+    
+    .success-icon::before {
+        content: '✓';
+        font-size: 64px;
+        color: white;
+        font-weight: bold;
+    }
+    
+    @keyframes scaleIn {
+        0% {
+            transform: scale(0);
+            opacity: 0;
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+    
+    .success-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 36px;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0 0 15px;
+    }
+    
+    .success-subtitle {
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        color: var(--text-light);
+        margin: 0 0 40px;
+        line-height: 1.6;
+    }
+    
+    .info-box {
+        background-color: var(--bg-light-blue);
+        border-radius: 16px;
+        padding: 30px;
+        margin: 40px 0;
+        text-align: left;
+    }
+    
+    .info-box-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin: 0 0 20px;
+        text-align: center;
+    }
+    
+    .info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 15px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        color: var(--text-light);
+    }
+    
+    .info-item:last-child {
+        margin-bottom: 0;
+    }
+    
+    .info-item-icon {
+        width: 24px;
+        height: 24px;
+        background-color: var(--primary-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+    
+    .info-item-text strong {
+        color: var(--text-dark);
+        font-weight: 600;
+    }
+    
+    .next-steps {
+        background-color: #fff3cd;
+        border-left: 4px solid #ffc107;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 30px 0;
+        text-align: left;
+    }
+    
+    .next-steps-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: #856404;
+        margin: 0 0 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .next-steps-title::before {
+        content: '📋';
+        font-size: 24px;
+    }
+    
+    .next-steps-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .next-steps-list li {
+        font-family: 'Roboto', sans-serif;
+        font-size: 15px;
+        color: #856404;
+        padding-left: 25px;
+        position: relative;
+        margin-bottom: 10px;
+    }
+    
+    .next-steps-list li:last-child {
+        margin-bottom: 0;
+    }
+    
+    .next-steps-list li::before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+    }
+    
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 40px;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        padding: 15px 35px;
+        border-radius: 80px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+        font-size: 16px;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: inline-block;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(99deg, #fee901 2.46%, #006478 97.81%);
+        color: var(--bg-light);
+        box-shadow: 0px 0px 20px 0px rgba(9, 9, 9, 0.2);
+    }
+    
+    .btn-primary:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 0px 30px 0px rgba(9, 9, 9, 0.3);
+    }
+    
+    .btn-secondary {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+    }
+    
+    .btn-secondary:hover {
+        background-color: var(--primary-color);
+        color: var(--bg-light);
+        transform: scale(1.05);
+    }
+    
+    .contact-support {
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        color: var(--text-light);
+        margin-top: 30px;
+    }
+    
+    .contact-support a {
+        color: var(--primary-color);
+        text-decoration: underline;
+    }
+    
+    .contact-support a:hover {
+        color: var(--text-dark);
+    }
+    
+    @media (max-width: 768px) {
+        .success-card {
+            padding: 40px 25px;
+        }
+        
+        .success-title {
+            font-size: 28px;
+        }
+        
+        .success-icon {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .success-icon::before {
+            font-size: 52px;
+        }
+        
+        .action-buttons {
+            flex-direction: column;
+        }
+        
+        .btn-primary,
+        .btn-secondary {
+            width: 100%;
+        }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <section class="success-section">
+        <div class="container">
+            <div class="success-card">
+                <div class="success-icon"></div>
+                
+                <h1 class="success-title">Registration Successful!</h1>
+                <p class="success-subtitle">
+                    Thank you for registering for the Fashion Business Webinar. 
+                    Your payment has been confirmed and your spot is secured!
+                </p>
+                
+                <div class="info-box">
+                    <h2 class="info-box-title">Webinar Details</h2>
+                    <div class="info-item">
+                        <div class="info-item-icon">📅</div>
+                        <div class="info-item-text">
+                            <strong>Date:</strong> 17th August 2025
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-item-icon">🕒</div>
+                        <div class="info-item-text">
+                            <strong>Time:</strong> 10:00 AM - 1:00 PM (IST)
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-item-icon">⏱️</div>
+                        <div class="info-item-text">
+                            <strong>Duration:</strong> 3 Hours
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-item-icon">💻</div>
+                        <div class="info-item-text">
+                            <strong>Platform:</strong> Zoom (Link will be shared via email)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="next-steps">
+                    <h3 class="next-steps-title">What Happens Next?</h3>
+                    <ul class="next-steps-list">
+                        <li>Check your email for the confirmation and payment receipt</li>
+                        <li>You'll receive the Zoom link 24 hours before the webinar</li>
+                        <li>We'll send reminders via email and WhatsApp</li>
+                        <li>Downloadable resources will be shared after the session</li>
+                    </ul>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="index.html" class="btn-primary">Back to Home</a>
+                    <a href="#" class="btn-secondary">Add to Calendar</a>
+                </div>
+                
+                <p class="contact-support">
+                    Didn't receive the confirmation email? Check your spam folder or 
+                    <a href="mailto:support@theneedles.com">contact support</a>
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+// Add to calendar functionality
+document.querySelector('.btn-secondary').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // Create calendar event details
+    const event = {
+        title: 'Fashion Business Webinar - The Needles',
+        description: 'Learn to start your own fashion business from industry experts',
+        location: 'Zoom (Online)',
+        start: '2025-08-17T10:00:00',
+        end: '2025-08-17T13:00:00'
+    };
+    
+    // Create Google Calendar link
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}&dates=${event.start.replace(/[-:]/g, '')}/${event.end.replace(/[-:]/g, '')}`;
+    
+    // Open in new tab
+    window.open(googleCalendarUrl, '_blank');
+});
+
+// Optional: Confetti animation (simple version)
+function createConfetti() {
+    const colors = ['#006478', '#fee901', '#4caf50', '#2196f3'];
+    const confettiCount = 50;
+    
+    for (let i = 0; i < confettiCount; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.style.position = 'fixed';
+            confetti.style.width = '10px';
+            confetti.style.height = '10px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = '-10px';
+            confetti.style.opacity = Math.random();
+            confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+            confetti.style.transition = 'all 3s ease-out';
+            confetti.style.pointerEvents = 'none';
+            confetti.style.zIndex = '9999';
+            
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => {
+                confetti.style.top = '100vh';
+                confetti.style.opacity = '0';
+            }, 10);
+            
+            setTimeout(() => {
+                confetti.remove();
+            }, 3000);
+        }, i * 30);
+    }
+}
+
+// Trigger confetti on load
+window.addEventListener('load', createConfetti);
+</script>
+</body>
+</html>
