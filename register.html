@@ -562,6 +562,51 @@ function getFormData() {
     };
 }
 
+// Function to validate email and phone with backend
+async function validateContactDetails(userData) {
+    try {
+        const response = await fetch('http://localhost:3000/validate-contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: userData.email,
+                phone: userData.phone,
+                whatsapp: userData.whatsapp
+            })
+        });
+        
+        const result = await response.json();
+        
+        if (!result.success && result.errors) {
+            // Show backend validation errors
+            if (result.errors.email) {
+                showError('email');
+                document.getElementById('email-error').textContent = result.errors.email;
+                document.getElementById('email-error').style.display = 'block';
+            }
+            if (result.errors.phone) {
+                showError('phone');
+                document.getElementById('phone-error').textContent = result.errors.phone;
+                document.getElementById('phone-error').style.display = 'block';
+            }
+            if (result.errors.whatsapp) {
+                showError('whatsapp');
+                document.getElementById('whatsapp-error').textContent = result.errors.whatsapp;
+                document.getElementById('whatsapp-error').style.display = 'block';
+            }
+            return false;
+        }
+        
+        return true;
+    } catch (error) {
+        console.error('Validation error:', error);
+        alert('Unable to validate contact details. Please check your internet connection and try again.');
+        return false;
+    }
+}
+
 // Function to create order using backend API
 async function createRazorpayOrder(userData) {
     try {
@@ -645,6 +690,19 @@ document.getElementById('registration-form').addEventListener('submit', async fu
     // Disable submit button and show loading state
     const submitBtn = document.getElementById('submit-btn');
     submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Validating...';
+    
+    // Validate contact details with backend
+    const isContactValid = await validateContactDetails(userData);
+    
+    if (!isContactValid) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Proceed to Payment';
+        alert('Please correct the errors in your contact details.');
+        return;
+    }
+    
+    // Update button text
     submitBtn.innerHTML = 'Processing...';
     
     // Create order

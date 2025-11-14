@@ -24,6 +24,64 @@ if (!RAZORPAY_KEY_ID || !RAZORPAY_KEY_SECRET) {
     process.exit(1);
 }
 
+// Validation helper functions
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function validatePhone(phone) {
+    // Remove all non-digit characters
+    const cleanPhone = phone.replace(/\D/g, '');
+    // Indian phone numbers: 10 digits (without country code) or 12 digits (with +91)
+    return cleanPhone.length === 10 || (cleanPhone.length === 12 && cleanPhone.startsWith('91'));
+}
+
+// Email and phone validation endpoint
+app.post('/validate-contact', (req, res) => {
+    try {
+        const { email, phone, whatsapp } = req.body;
+        const errors = {};
+
+        // Validate email
+        if (!email || !validateEmail(email)) {
+            errors.email = 'Please enter a valid email address';
+        }
+
+        // Validate phone
+        if (!phone || !validatePhone(phone)) {
+            errors.phone = 'Please enter a valid 10-digit phone number';
+        }
+
+        // Validate WhatsApp
+        if (!whatsapp || !validatePhone(whatsapp)) {
+            errors.whatsapp = 'Please enter a valid 10-digit WhatsApp number';
+        }
+
+        // Check if email or phone already registered (optional - requires database)
+        // You can add duplicate check here if you implement database
+
+        if (Object.keys(errors).length > 0) {
+            return res.status(400).json({ 
+                success: false,
+                errors: errors
+            });
+        }
+
+        res.json({ 
+            success: true,
+            message: 'Contact details validated successfully'
+        });
+    } catch (error) {
+        console.error('Validation error:', error);
+        res.status(500).json({ 
+            success: false,
+            message: 'Validation failed',
+            error: error.message 
+        });
+    }
+});
+
 // Create order endpoint
 app.post('/create-order', async (req, res) => {
     try {
