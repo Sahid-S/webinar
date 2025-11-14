@@ -93,9 +93,11 @@ async function sendEmailOTP(email, otp) {
 // Send OTP endpoint
 app.post('/send-otp', async (req, res) => {
     try {
+        console.log('Send OTP request received:', req.body);
         const { email } = req.body;
 
         if (!validateEmail(email)) {
+            console.log('Invalid email format:', email);
             return res.status(400).json({ 
                 success: false,
                 message: 'Invalid email address'
@@ -103,6 +105,7 @@ app.post('/send-otp', async (req, res) => {
         }
 
         const otp = generateOTP();
+        console.log(`Generated OTP for ${email}: ${otp}`);
         
         // Store OTP with expiry (10 minutes)
         otpStore.set(email, {
@@ -111,8 +114,10 @@ app.post('/send-otp', async (req, res) => {
             attempts: 0
         });
 
+        console.log('Attempting to send email...');
         // Send email
         await sendEmailOTP(email, otp);
+        console.log('Email sent successfully');
 
         console.log(`Email OTP sent to ${email}: ${otp}`); // For development/testing
 
