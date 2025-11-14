@@ -2,9 +2,22 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Store OTPs temporarily (in production, use Redis or database)
+const otpStore = new Map();
+
+// Email transporter configuration
+const emailTransporter = nodemailer.createTransporter({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
 
 // Middleware
 app.use(cors());
@@ -36,6 +49,137 @@ function validatePhone(phone) {
     // Indian phone numbers: 10 digits (without country code) or 12 digits (with +91)
     return cleanPhone.length === 10 || (cleanPhone.length === 12 && cleanPhone.startsWith('91'));
 }
+
+// Generate 6-digit OTP
+function generateOTP() {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
+// Send Email OTP
+async function sendEmailOTP(email, otp) {
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: 'Email Verification - The Needles Webinar',
+        html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                <h2 style="color: #006478;">Email Verification</h2>
+                <p>Thank you for registering for the Fashion Business Webinar!</p>
+                <p>Your verification code is:</p>
+                <div style="background: #f5f5f5; padding: 20px; text-align: center; margin: 20px 0; border-radius: 8px;">
+                    <h1 style="color: #006478; font-size: 36px; letter-spacing: 5px; margin: 0;">${otp}</h1>
+                </div>
+                <p><strong>This code will expire in 10 minutes.</strong></p>
+                <p>If you didn't request this code, please ignore this email.</p>
+                <hr style="border: 1px solid #e9e9e9; margin: 30px 0;">
+                <p style="color: #999; font-size: 12px; text-align: center;">
+                    The Needles - Fashion Business Webinar<br>
+                    December 10, 2025 | 9:00 AM - 12:00 PM IST
+                </p>
+            </div>
+        `
+    };
+
+    return emailTransporter.sendMail(mailOptions);
+}
+
+// Send OTP endpoint
+app.post('/send-otp', async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        if (!validateEmail(email)) {
+            return res.status(400).json({ 
+                success: false,
+                message: 'Invalid email address'
+            });
+        }
+
+        const otp = generateOTP();
+        
+        // Store OTP with expiry (10 minutes)
+        otpStore.set(email, {
+            otp: otp,
+            expiry: Date.now() + 10 * 60 * 1000,
+            attempts: 0
+        });
+
+        // Send email
+        await sendEmailOTP(email, otp);
+
+        console.log(`Email OTP sent to ${email}: ${otp}`); // For development/testing
+
+        res.json({ 
+            success: true,
+            message: 'OTP sent to your email'
+        });
+
+    } catch (error) {
+        console.error('Send OTP error:', error);
+        res.status(500).json({ 
+            success: false,
+            message: 'Failed to send OTP. Please check your email configuration.',
+            error: error.message 
+        });
+    }
+});
+
+// Verify OTP endpoint
+app.post('/verify-otp', (req, res) => {
+    try {
+        const { email, otp } = req.body;
+
+        if (!otpStore.has(email)) {
+            return res.status(400).json({ 
+                success: false,
+                message: 'OTP not found or expired. Please request a new one.'
+            });
+        }
+
+        const stored = otpStore.get(email);
+
+        // Check if expired
+        if (Date.now() > stored.expiry) {
+            otpStore.delete(email);
+            return res.status(400).json({ 
+                success: false,
+                message: 'OTP expired. Please request a new one.'
+            });
+        }
+
+        // Check attempts
+        if (stored.attempts >= 3) {
+            otpStore.delete(email);
+            return res.status(400).json({ 
+                success: false,
+                message: 'Too many failed attempts. Please request a new OTP.'
+            });
+        }
+
+        // Verify OTP
+        if (stored.otp === otp) {
+            otpStore.delete(email);
+            res.json({ 
+                success: true,
+                message: 'Email verified successfully'
+            });
+        } else {
+            stored.attempts += 1;
+            otpStore.set(email, stored);
+            res.status(400).json({ 
+                success: false,
+                message: `Invalid OTP. ${3 - stored.attempts} attempts remaining.`
+            });
+        }
+    } catch (error) {
+        console.error('Verify OTP error:', error);
+        res.status(500).json({ 
+            success: false,
+            message: 'OTP verification failed',
+            error: error.message 
+        });
+    }
+});
 
 // Email and phone validation endpoint
 app.post('/validate-contact', (req, res) => {

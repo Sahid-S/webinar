@@ -158,6 +158,55 @@
         border-color: #e74c3c;
     }
     
+    .btn-send-otp {
+        padding: 14px 20px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        background: #006478;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        min-width: 120px;
+    }
+    
+    .btn-send-otp:hover:not(:disabled) {
+        background: #004d5c;
+        transform: translateY(-1px);
+    }
+    
+    .btn-send-otp:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+    }
+    
+    .btn-verify-otp {
+        padding: 12px 20px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 8px;
+    }
+    
+    .btn-verify-otp:hover:not(:disabled) {
+        background: #218838;
+    }
+    
+    .btn-verify-otp:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+    }
+    
     .payment-section {
         background-color: var(--bg-light-blue);
         padding: 40px;
@@ -364,8 +413,18 @@
                     
                     <div class="form-group">
                         <label for="email" class="form-label">Email Address<span class="required">*</span></label>
-                        <input type="email" id="email" name="email" class="form-input" placeholder="your.email@example.com" required>
-                        <span class="error-message" id="email-error">Please enter a valid email address</span>
+                        <div style="display: flex; gap: 10px; align-items: flex-start;">
+                            <div style="flex: 1;">
+                                <input type="email" id="email" name="email" class="form-input" placeholder="your.email@example.com" required>
+                                <span class="error-message" id="email-error">Please enter a valid email address</span>
+                                <div id="email-otp-section" style="display: none; margin-top: 10px;">
+                                    <input type="text" id="email-otp" class="form-input" placeholder="Enter 6-digit OTP" maxlength="6" pattern="[0-9]{6}">
+                                    <button type="button" id="verify-email-otp" class="btn-verify-otp">Verify Email</button>
+                                </div>
+                                <span class="success-message" id="email-verified" style="display: none; color: #28a745; margin-top: 5px; font-size: 14px;">✓ Email Verified</span>
+                            </div>
+                            <button type="button" id="send-email-otp" class="btn-send-otp">Send OTP</button>
+                        </div>
                     </div>
                     
                     <div class="form-row">
@@ -678,6 +737,12 @@ function handlePaymentSuccess(response, userData) {
 document.getElementById('registration-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     
+    // Check if email is verified
+    if (!emailVerified) {
+        alert('Please verify your email before proceeding to payment.');
+        return;
+    }
+    
     // Validate form
     if (!validateForm()) {
         alert('Please fill in all required fields correctly.');
@@ -788,6 +853,98 @@ document.getElementById('phone').addEventListener('blur', function() {
     const whatsappField = document.getElementById('whatsapp');
     if (!whatsappField.value && this.value) {
         whatsappField.value = this.value;
+    }
+});
+
+// OTP Verification State
+let emailVerified = false;
+
+// Send Email OTP
+document.getElementById('send-email-otp').addEventListener('click', async function() {
+    const email = document.getElementById('email').value.trim();
+    
+    if (!email) {
+        alert('Please enter your email address');
+        return;
+    }
+    
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        alert('Please enter a valid email address');
+        return;
+    }
+    
+    const btn = this;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    
+    try {
+        const response = await fetch('https://webinar-75c9.onrender.com/send-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            document.getElementById('email-otp-section').style.display = 'block';
+            alert('OTP sent to your email. Please check your inbox.');
+            btn.textContent = 'Resend OTP';
+            setTimeout(() => { btn.disabled = false; }, 60000); // Re-enable after 1 minute
+        } else {
+            alert(result.message || 'Failed to send OTP');
+            btn.disabled = false;
+            btn.textContent = 'Send OTP';
+        }
+    } catch (error) {
+        console.error('Send email OTP error:', error);
+        alert('Failed to send OTP. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'Send OTP';
+    }
+});
+
+// Verify Email OTP
+document.getElementById('verify-email-otp').addEventListener('click', async function() {
+    const email = document.getElementById('email').value.trim();
+    const otp = document.getElementById('email-otp').value.trim();
+    
+    if (!otp || otp.length !== 6) {
+        alert('Please enter the 6-digit OTP');
+        return;
+    }
+    
+    const btn = this;
+    btn.disabled = true;
+    btn.textContent = 'Verifying...';
+    
+    try {
+        const response = await fetch('https://webinar-75c9.onrender.com/verify-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, otp })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            emailVerified = true;
+            document.getElementById('email-verified').style.display = 'block';
+            document.getElementById('email-otp-section').style.display = 'none';
+            document.getElementById('email').readOnly = true;
+            document.getElementById('send-email-otp').style.display = 'none';
+            alert('Email verified successfully!');
+        } else {
+            alert(result.message || 'Invalid OTP');
+            btn.disabled = false;
+            btn.textContent = 'Verify Email';
+        }
+    } catch (error) {
+        console.error('Verify email OTP error:', error);
+        alert('Failed to verify OTP. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'Verify Email';
     }
 });
 </script>
