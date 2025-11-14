@@ -19,7 +19,12 @@ const emailTransporter = createTransport({
     }
 });
 
-console.log('Email transporter initialized');
+if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    console.warn('⚠️  WARNING: EMAIL_USER or EMAIL_PASS not configured! OTP emails will not work.');
+    console.warn('⚠️  Add these environment variables in Render dashboard.');
+} else {
+    console.log('✓ Email transporter initialized successfully');
+}
 
 // Middleware
 app.use(cors());
@@ -118,9 +123,19 @@ app.post('/send-otp', async (req, res) => {
 
     } catch (error) {
         console.error('Send OTP error:', error);
+        
+        // Check if it's a Gmail authentication error
+        if (error.code === 'EAUTH' || error.responseCode === 535) {
+            return res.status(500).json({ 
+                success: false,
+                message: 'Email service not configured. Please contact support.',
+                error: 'Gmail credentials missing or invalid'
+            });
+        }
+        
         res.status(500).json({ 
             success: false,
-            message: 'Failed to send OTP. Please check your email configuration.',
+            message: 'Failed to send OTP. Please try again or contact support.',
             error: error.message 
         });
     }
