@@ -238,8 +238,8 @@ app.get('/success', (req, res) => {
                 <h1>Payment Successful!</h1>
                 <p>Thank you for registering for the Fashion Business Webinar!</p>
                 <p>You will receive webinar details and Zoom link via email within 24 hours.</p>
-                <p><strong>Webinar Date:</strong> 17th August 2025<br>
-                <strong>Time:</strong> 10AM - 1PM (IST)</p>
+                <p><strong>Webinar Date:</strong> 10th December 2025<br>
+                <strong>Time:</strong> 9AM - 12PM (IST)</p>
                 <a href="/" class="btn">Back to Home</a>
             </div>
         </body>

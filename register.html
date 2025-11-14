@@ -575,7 +575,7 @@ async function createRazorpayOrder(userData) {
                 currency: 'INR',
                 receipt: 'webinar_' + Date.now(),
                 notes: {
-                    webinar: 'Fashion Business Webinar - 17th August 2025',
+                    webinar: 'Fashion Business Webinar - 10th December 2025',
                     event_type: 'webinar_registration',
                     customer_name: userData.firstName + ' ' + userData.lastName,
                     customer_email: userData.email,
@@ -675,7 +675,7 @@ document.getElementById('registration-form').addEventListener('submit', async fu
             "contact": userData.phone
         },
         "notes": {
-            "webinar": "Fashion Business Webinar - 17th August 2025",
+            "webinar": "Fashion Business Webinar - 10th December 2025",
             "city": userData.city,
             "category": userData.category
         },
