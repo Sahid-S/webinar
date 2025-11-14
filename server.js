@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const nodemailer = require('nodemailer');
+const { createTransport } = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,13 +11,15 @@ const PORT = process.env.PORT || 3000;
 const otpStore = new Map();
 
 // Email transporter configuration
-const emailTransporter = nodemailer.createTransporter({
+const emailTransporter = createTransport({
     service: 'gmail',
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
     }
 });
+
+console.log('Email transporter initialized');
 
 // Middleware
 app.use(cors());
