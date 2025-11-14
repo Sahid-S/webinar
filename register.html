@@ -565,7 +565,7 @@ function getFormData() {
 // Function to validate email and phone with backend
 async function validateContactDetails(userData) {
     try {
-        const response = await fetch('http://localhost:3000/validate-contact', {
+        const response = await fetch('https://webinar-75c9.onrender.com/validate-contact', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -610,7 +610,7 @@ async function validateContactDetails(userData) {
 // Function to create order using backend API
 async function createRazorpayOrder(userData) {
     try {
-        const response = await fetch('http://localhost:3000/create-order', {
+        const response = await fetch('https://webinar-75c9.onrender.com/create-order', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -646,7 +646,7 @@ async function createRazorpayOrder(userData) {
 // Function to handle successful payment
 function handlePaymentSuccess(response, userData) {
     // Send payment details and user data to backend for verification
-    fetch('http://localhost:3000/verify-payment', {
+    fetch('https://webinar-75c9.onrender.com/verify-payment', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
