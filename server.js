@@ -111,8 +111,11 @@ async function sendEmailOTP(email, otp) {
 
 // Send OTP endpoint
 app.post('/send-otp', async (req, res) => {
+    console.log('=== SEND OTP ENDPOINT CALLED ===');
+    console.log('Request body:', JSON.stringify(req.body));
+    console.log('Timestamp:', new Date().toISOString());
+    
     try {
-        console.log('Send OTP request received:', req.body);
         const { email } = req.body;
 
         if (!validateEmail(email)) {
@@ -146,21 +149,25 @@ app.post('/send-otp', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Send OTP error:', error);
+        console.error('=== SEND OTP ERROR ===');
+        console.error('Error message:', error.message);
+        console.error('Error code:', error.code);
+        console.error('Error stack:', error.stack);
+        console.error('Full error:', JSON.stringify(error, null, 2));
         
-        // Check if it's a Gmail authentication error
+        // Check if it's authentication error
         if (error.code === 'EAUTH' || error.responseCode === 535) {
             return res.status(500).json({ 
                 success: false,
                 message: 'Email service not configured. Please contact support.',
-                error: 'Gmail credentials missing or invalid'
+                error: 'SMTP credentials missing or invalid'
             });
         }
         
         res.status(500).json({ 
             success: false,
             message: 'Failed to send OTP. Please try again or contact support.',
-            error: error.message 
+            error: error.message || 'Unknown error'
         });
     }
 });
