@@ -24,19 +24,23 @@ const emailTransporter = createTransport({
     }
 });
 
-if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    console.warn('⚠️  WARNING: EMAIL_USER or EMAIL_PASS not configured! OTP emails will not work.');
-    console.warn('⚠️  Add these environment variables in Render dashboard.');
+const smtpUser = process.env.SMTP_USERNAME || process.env.EMAIL_USER;
+const smtpPass = process.env.SMTP_PASSWORD || process.env.EMAIL_PASS;
+
+if (!smtpUser || !smtpPass) {
+    console.warn('⚠️  WARNING: SMTP credentials not configured! OTP emails will not work.');
+    console.warn('⚠️  Add SMTP_USERNAME and SMTP_PASSWORD in Render dashboard.');
 } else {
     console.log('✓ Email transporter initialized successfully');
-    console.log('Email User:', process.env.EMAIL_USER);
+    console.log('SMTP User:', smtpUser);
+    console.log('Verified Sender:', process.env.VERIFIED_SENDER || 'jamindustries.info@gmail.com');
     
     // Verify transporter configuration
     emailTransporter.verify(function(error, success) {
         if (error) {
             console.error('❌ Email transporter verification failed:', error.message);
         } else {
-            console.log('✓ Email server is ready to send messages');
+            console.log('✓ Amazon SES is ready to send messages');
         }
     });
 }
