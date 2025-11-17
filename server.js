@@ -10,18 +10,18 @@ const PORT = process.env.PORT || 3000;
 // Store OTPs temporarily (in production, use Redis or database)
 const otpStore = new Map();
 
-// Email transporter configuration
+// Email transporter configuration - Amazon SES
 const emailTransporter = createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true, // Use SSL
+    host: 'email-smtp.us-east-1.amazonaws.com',
+    port: 587,
+    secure: false, // Use STARTTLS
     auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+        user: process.env.SMTP_USERNAME || process.env.EMAIL_USER,
+        pass: process.env.SMTP_PASSWORD || process.env.EMAIL_PASS
     },
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 10000
+    tls: {
+        rejectUnauthorized: false
+    }
 });
 
 if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
@@ -80,7 +80,7 @@ function generateOTP() {
 // Send Email OTP
 async function sendEmailOTP(email, otp) {
     const mailOptions = {
-        from: process.env.EMAIL_USER,
+        from: process.env.VERIFIED_SENDER || 'jamindustries.info@gmail.com',
         to: email,
         subject: 'Email Verification - The Needles Webinar',
         html: `
