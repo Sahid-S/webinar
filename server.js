@@ -47,6 +47,13 @@ if (!smtpUser || !smtpPass) {
 
 // Middleware
 app.use(cors());
+
+// Request logger
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+    next();
+});
+
 // For webhook endpoint, we need raw body to verify signature
 app.use('/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
@@ -495,6 +502,19 @@ app.get('/success', (req, res) => {
         </body>
         </html>
     `);
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+    console.error('=== GLOBAL ERROR HANDLER ===');
+    console.error('Path:', req.path);
+    console.error('Error:', err.message);
+    console.error('Stack:', err.stack);
+    res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: err.message
+    });
 });
 
 // Start server
