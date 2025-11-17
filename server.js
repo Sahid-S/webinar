@@ -34,15 +34,7 @@ if (!smtpUser || !smtpPass) {
     console.log('✓ Email transporter initialized successfully');
     console.log('SMTP User:', smtpUser);
     console.log('Verified Sender:', process.env.VERIFIED_SENDER || 'jamindustries.info@gmail.com');
-    
-    // Verify transporter configuration
-    emailTransporter.verify(function(error, success) {
-        if (error) {
-            console.error('❌ Email transporter verification failed:', error.message);
-        } else {
-            console.log('✓ Amazon SES is ready to send messages');
-        }
-    });
+    console.log('✓ Amazon SES configured (verification will happen on first email)');
 }
 
 // Middleware
